@@ -223,6 +223,8 @@ void loop() {
     Serial.println(comensPWM);
     Serial.print(" RPM: ");
     Serial.println(current_rpm);
+    Serial.print("ratio_comens: ");
+    Serial.println(ratio_comens(current_rpm));
     analogWrite(OUTPUT_PWM, constrain(comensPWM, 0, 255));
   }
 }
