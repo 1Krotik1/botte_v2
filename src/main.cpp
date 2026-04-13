@@ -16,6 +16,7 @@ FreqMeter freq;
 GTimer<millis> tmr1(65,true); // Таймер для обработки логики изменения ШИМ при удержании кнопок 
 GTimer<millis> tmr2(50,true); // Таймер для обновления состояния оборотов двигателя машины и телеметрии
 GTimer<millis> tmr3(40, true); // Таймер для компенсации ШИМ
+GTimer<millis> tmrdebug(100, true); // Таймер для вывода отладочной информации
 GTimer<millis> blinkTimer(500, true); // Таймер для мигания индикатора при ошибке
 
 bool ledState = false;
@@ -215,6 +216,11 @@ void loop() {
       }
     }
     
+    analogWrite(OUTPUT_PWM, constrain(comensPWM, 0, 255));
+  }
+  
+  // Вывод отладочной информации
+  if (tmrdebug.tick()) {
     Serial.print(" Setpoint (PWM): ");
     Serial.println(pwm_setpoint);
     Serial.print(" Result PWM: ");
@@ -225,6 +231,5 @@ void loop() {
     Serial.println(current_rpm);
     Serial.print("ratio_comens: ");
     Serial.println(ratio_comens(current_rpm));
-    analogWrite(OUTPUT_PWM, constrain(comensPWM, 0, 255));
   }
 }
