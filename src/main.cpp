@@ -40,6 +40,7 @@ uint8_t pwm_first_step = 38;
 
 uint8_t pwm_min_for_compensation = 54;
 uint8_t comensPWM = 0;
+
 float ratio_comens(uint32_t x){
   uint16_t rpm_min = 600;
   uint16_t rpm_max = 2500;
@@ -214,14 +215,14 @@ void loop() {
       }
     }
     
-    // Serial.print(" Setpoint (PWM): ");
-    // Serial.println(pwm_setpoint);
-    // Serial.print(" Result PWM: ");
-    // Serial.println(result_pwm);
-    // Serial.print(" compensated PWM: ");
-    // Serial.println(comensPWM);
-    // Serial.print(" RPM: ");
-    // Serial.println(current_rpm);
+    Serial.print(" Setpoint (PWM): ");
+    Serial.println(pwm_setpoint);
+    Serial.print(" Result PWM: ");
+    Serial.println(result_pwm);
+    Serial.print(" compensated PWM: ");
+    Serial.println(comensPWM);
+    Serial.print(" RPM: ");
+    Serial.println(current_rpm);
     analogWrite(OUTPUT_PWM, constrain(comensPWM, 0, 255));
   }
 }
